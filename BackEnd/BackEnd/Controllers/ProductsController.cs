@@ -24,7 +24,7 @@ namespace BackEnd.Controllers
         [HttpGet]
         public IActionResult GetProducts()
         {
-
+            
             var productList = _context.Products.Select(p => new
             {
                 p.ProductId,
@@ -34,14 +34,6 @@ namespace BackEnd.Controllers
                 p.ProductUnitPrice,
                 p.Provider
             }).ToList();
-
-        /*    var products = _context.Products
-                .Include("ProductsHasProviders")
-                .Include("Providers")
-                .ToList();*/
-
-        //    var user = db.Rol.Include("Usuario").Include("Funcion")
-          //      .Where(m => m.Usuario.Any(u => u.UserName == userName) && m.Funcion.Any(f => f.id_funcion == data)).FirstOrDefault();
 
             return Ok(productList);
         }
@@ -129,11 +121,19 @@ namespace BackEnd.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                _context.Products.Remove(products);
+                await _context.SaveChangesAsync();
 
-            _context.Products.Remove(products);
-            await _context.SaveChangesAsync();
+                return Ok(products);
+            }
+            
 
-            return Ok(products);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         private bool ProductsExists(int id)

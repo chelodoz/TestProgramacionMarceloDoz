@@ -58,7 +58,6 @@ export class FormCustomerComponent implements OnInit {
     this.suscription.unsubscribe();
   }
   saveCustomer(){
-      console.log("id",this.customerId);
     if (this.customerId=== 0){
       this.add();
     }
@@ -102,8 +101,10 @@ export class FormCustomerComponent implements OnInit {
         this.customerId= 0;
       })
   }
-
-  test(){
-    console.log(this.form.value);
+  resetForm(){
+    this.form.reset();
+    this.customerId=0;
   }
+
+
 }

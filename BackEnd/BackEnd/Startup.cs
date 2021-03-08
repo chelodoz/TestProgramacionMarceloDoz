@@ -30,10 +30,11 @@ namespace BackEnd
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
        
-
+            //DB connection
             services.AddDbContext<MarceloDozDbContext>(options =>
-      options.UseSqlServer(Configuration.GetConnectionString("MarceloDozDataBase")));
+            options.UseSqlServer(Configuration.GetConnectionString("MarceloDozDataBase")));
 
+            //Allow HTTP from Angular Aplication
             services.AddCors(options => options.AddPolicy("AllowWebApp",
                 builder => builder
                             .AllowAnyOrigin()

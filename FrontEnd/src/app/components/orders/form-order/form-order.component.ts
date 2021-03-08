@@ -41,33 +41,21 @@ export class FormOrderComponent implements OnInit {
     this.suscription=this.orderService.getOrder$().subscribe(data=>{
       
         this.order = data;
-//console.log("valor de patch",this.order);
-  //      console.log("valor de patch",this.order.orderTotalPrice);
+
         
         
         this.form.patchValue({
           orderTotalPrice : this.order.orderTotalPrice,
     
         });
-     //   console.log("form",this.form.value  );
+
       });
     
     
   }
-/*
-  updateTotal(){
-    
-   var x= this.orderService.orderItems.reduce((prev,curr)=>{
-      return prev+(curr.productUnitPrice*curr.orderQuantity)
-    },0);
-    console.log("updateTotal",x);
 
-  }
-*/
 
-asd(){
-  
-}
+
 
  createOrder(){
 
@@ -87,6 +75,6 @@ asd(){
   })
   
 
-  console.log("createOrder",order);
+
  }
 }

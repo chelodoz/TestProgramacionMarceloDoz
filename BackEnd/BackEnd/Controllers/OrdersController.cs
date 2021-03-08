@@ -41,14 +41,6 @@ namespace BackEnd.Controllers
                 o.Employee
             }).ToList();
 
-            /*    var products = _context.Products
-                    .Include("ProductsHasProviders")
-                    .Include("Providers")
-                    .ToList();*/
-
-            //    var user = db.Rol.Include("Usuario").Include("Funcion")
-            //      .Where(m => m.Usuario.Any(u => u.UserName == userName) && m.Funcion.Any(f => f.id_funcion == data)).FirstOrDefault();
-
             return Ok(orderList);
         }
 
@@ -126,17 +118,9 @@ namespace BackEnd.Controllers
             }
             catch(Exception ex)
             {
-                throw ex;
+                return BadRequest();
             }
-           /* if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-           
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetOrders", new { id = orders.OrderId }, orders);*/
+          
         }
 
         // DELETE: api/Orders/5
@@ -154,10 +138,18 @@ namespace BackEnd.Controllers
                 return NotFound();
             }
 
-            _context.Orders.Remove(orders);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Orders.Remove(orders);
+                await _context.SaveChangesAsync();
 
-            return Ok(orders);
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+
         }
 
         private bool OrdersExists(int id)

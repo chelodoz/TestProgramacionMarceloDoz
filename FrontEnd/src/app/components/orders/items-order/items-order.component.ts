@@ -17,12 +17,10 @@ export class ItemsOrderComponent implements OnInit {
 
   deleteItem(id : number){
     var objIndex = this.orderService.orderItems.findIndex(item => item.productId == id);
-    console.log("valor del delete Item",id);
-    console.log("valor del index",objIndex);
     this.orderService.orderItems.splice(objIndex, 1);
     this.orderService.orderDetail.splice(objIndex, 1);
     this.orderService.updateTotal();
-    this.orderService.test();
+
     
   }
 }

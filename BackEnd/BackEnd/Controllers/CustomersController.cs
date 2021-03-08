@@ -111,10 +111,17 @@ namespace BackEnd.Controllers
                 return NotFound();
             }
 
-            _context.Customers.Remove(customers);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Customers.Remove(customers);
+                await _context.SaveChangesAsync();
 
-            return Ok(customers);
+                return Ok(customers);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         private bool CustomersExists(int id)

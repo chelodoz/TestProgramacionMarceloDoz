@@ -46,7 +46,7 @@ export class FormProviderComponent implements OnInit {
     this.suscription.unsubscribe();
   }
   saveProvider(){
-      console.log("id",this.providerId);
+
     if (this.providerId=== 0){
       this.add();
     }
@@ -82,5 +82,9 @@ export class FormProviderComponent implements OnInit {
         this.form.reset();
         this.providerId= 0;
       })
+  }
+  resetForm(){
+    this.form.reset();
+    this.providerId=0;
   }
 }

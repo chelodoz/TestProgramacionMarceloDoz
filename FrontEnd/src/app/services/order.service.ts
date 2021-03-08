@@ -33,10 +33,6 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  test(){
-    console.log("orderitems",this.orderItems);
-  }
-
  
 
   updateTotal(){
@@ -52,20 +48,16 @@ export class OrderService {
     
     this.order.next(x);
 
-    console.log("test",x);
-     console.log("updateTotal",this.order);
-     console.log("array",this.orderDetail);
- 
+
    }
   
    saveOrder(): Observable<Order> {
-    console.log("valor de order en service",this.order.value);
-    console.log("vaor de orderDetail en service",this.orderDetail);
+
      var body ={
        ...this.order.value,
        OrderDetails : this.orderDetail
      }
-     console.log("body",body);
+
     return this.http.post<Order>(this.myAppUrl + this.myApiUrl, body);
   }
   getOrders(){

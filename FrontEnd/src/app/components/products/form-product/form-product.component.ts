@@ -40,8 +40,6 @@ export class FormProductComponent implements OnInit {
     this.suscription=this.productService.getProduct$().subscribe(data=>{
       
       this.product = data;
-  
-      
       
       this.form.patchValue({
         productName : this.product.productName,
@@ -56,6 +54,7 @@ export class FormProductComponent implements OnInit {
       });
     }
       if(this.product.productId != 0){
+        
       this.productId = this.product.productId;
       }
       
@@ -116,5 +115,12 @@ export class FormProductComponent implements OnInit {
         });
       })
   }
+
+  resetForm(){
+    this.form.reset();
+    this.productId=0;
+  }
+
+ 
 }
 

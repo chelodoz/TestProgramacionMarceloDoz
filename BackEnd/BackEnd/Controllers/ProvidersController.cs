@@ -89,11 +89,17 @@ namespace BackEnd.Controllers
             {
                 return BadRequest(ModelState);
             }
+            try
+            {
+                _context.Providers.Add(providers);
+                await _context.SaveChangesAsync();
 
-            _context.Providers.Add(providers);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProviders", new { id = providers.ProviderId }, providers);
+                return CreatedAtAction("GetProviders", new { id = providers.ProviderId }, providers);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE: api/Providers/5
@@ -110,11 +116,18 @@ namespace BackEnd.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                _context.Providers.Remove(providers);
+                await _context.SaveChangesAsync();
 
-            _context.Providers.Remove(providers);
-            await _context.SaveChangesAsync();
-
-            return Ok(providers);
+                return Ok(providers);
+            }
+            
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         private bool ProvidersExists(int id)

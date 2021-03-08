@@ -48,7 +48,7 @@ export class ProductSelectComponent implements OnInit {
     }
     
 
-    console.log("update", id);
+
 
     
 

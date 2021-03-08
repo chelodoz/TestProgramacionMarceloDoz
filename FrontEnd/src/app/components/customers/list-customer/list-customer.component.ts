@@ -19,8 +19,11 @@ export class ListCustomerComponent implements OnInit {
   deleteCustomer(id : number){
     if(confirm('Confirm delete action')){
       this.customerService.deleteCustomer(id).subscribe(data => {
-        this.toastr.warning('customer deleted');
+        this.toastr.warning('Customer deleted');
         this.customerService.getCustomers();
+      },
+      error=>{
+        this.toastr.error('Customer is attach to order','Cannot delete customer');
       })
     }
   }

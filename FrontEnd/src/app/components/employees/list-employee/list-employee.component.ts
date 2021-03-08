@@ -21,6 +21,9 @@ export class ListEmployeeComponent implements OnInit {
       this.employeeService.deleteEmployee(id).subscribe(data => {
         this.toastr.warning('Employee deleted');
         this.employeeService.getEmployees();
+      },
+      error=>{
+        this.toastr.error('Employee is attach to order','Cannot delete employee');
       })
     }
   }

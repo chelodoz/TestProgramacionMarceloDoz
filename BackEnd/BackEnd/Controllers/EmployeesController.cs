@@ -124,11 +124,19 @@ namespace BackEnd.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                _context.Employees.Remove(employees);
+                await _context.SaveChangesAsync();
 
-            _context.Employees.Remove(employees);
-            await _context.SaveChangesAsync();
+                return Ok(employees);
+            }
+            
 
-            return Ok(employees);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         private bool EmployeesExists(int id)

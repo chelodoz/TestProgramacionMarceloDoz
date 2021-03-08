@@ -30,6 +30,9 @@ export class FormEmployeeComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
+
+    this.form.reset();
+
     this.suscription=this.employeeService.getEmployee$().subscribe(data=>{
       
       this.employee = data;
@@ -55,7 +58,7 @@ export class FormEmployeeComponent implements OnInit, OnDestroy {
     this.suscription.unsubscribe();
   }
   saveEmployee(){
-      console.log("id",this.employeeId);
+
     if (this.employeeId=== 0){
       this.add();
     }
@@ -96,5 +99,10 @@ export class FormEmployeeComponent implements OnInit, OnDestroy {
         this.form.reset();
         this.employeeId= 0;
       })
+  }
+
+  resetForm(){
+    this.form.reset();
+    this.employeeId=0;
   }
 }

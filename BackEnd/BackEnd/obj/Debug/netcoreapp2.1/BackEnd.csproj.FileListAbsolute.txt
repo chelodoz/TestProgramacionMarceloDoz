@@ -11,3 +11,4 @@ C:\Users\Chelo\Desktop\TestProgramacionMarceloDoz\BackEnd\BackEnd\obj\Debug\netc
 C:\Users\Chelo\Desktop\TestProgramacionMarceloDoz\BackEnd\BackEnd\bin\Debug\netcoreapp2.1\BackEnd.pdb
 C:\Users\Chelo\Desktop\TestProgramacionMarceloDoz\BackEnd\BackEnd\obj\Debug\netcoreapp2.1\BackEnd.dll
 C:\Users\Chelo\Desktop\TestProgramacionMarceloDoz\BackEnd\BackEnd\obj\Debug\netcoreapp2.1\BackEnd.pdb
+C:\Users\Chelo\Desktop\TestProgramacionMarceloDoz\BackEnd\BackEnd\obj\Debug\netcoreapp2.1\BackEnd.csprojAssemblyReference.cache

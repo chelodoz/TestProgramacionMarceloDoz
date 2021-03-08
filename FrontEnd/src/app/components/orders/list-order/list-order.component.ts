@@ -18,7 +18,6 @@ export class ListOrderComponent implements OnInit {
   }
 
   generatePDF(order : any){
-    console.log(order);
     var date_new = new Date(order.orderSaleDate);
     const pdf = new PdfMakeWrapper();
     pdf.add( 

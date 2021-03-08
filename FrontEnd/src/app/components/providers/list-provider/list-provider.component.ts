@@ -21,6 +21,9 @@ export class ListProviderComponent implements OnInit {
       this.providerService.deleteProvider(id).subscribe(data => {
         this.toastr.warning('provider deleted');
         this.providerService.getProviders();
+      },
+      error=>{
+        this.toastr.error('Provider is attach to product','Cannot delete provider');
       })
     }
   }

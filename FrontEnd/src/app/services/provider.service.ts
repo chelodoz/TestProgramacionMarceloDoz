@@ -26,7 +26,6 @@ export class ProviderService {
   getProviders() {
     this.http.get<Provider>(this.myAppUrl + this.myApiUrl).toPromise()
        .then(data =>{
-         console.log(data);
          this.list = data as unknown as Provider[];
        });
    }
