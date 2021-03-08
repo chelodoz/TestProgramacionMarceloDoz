@@ -1,0 +1,23 @@
+<table class="table table-sm">
+    <thead>
+        <th>Nº</th>
+        <th>Sale Date</th>
+        <th>Customer</th>
+        <th>Employee</th>
+        
+        <th>Total Price</th>
+        <th></th>
+    </thead>
+    <tr *ngFor="let order of orderService.list">
+        <td>{{order.orderId}}</td>
+        <td>{{order.orderSaleDate | date:'dd/MM/yyyy'}}</td>
+        <td>{{order.customer.customerFirstName}} {{order.customer.customerLastName}}</td>
+        <td>{{order.employee.employeeFirstName}} {{order.employee.employeeLastName}}</td>
+        
+        <td>{{order.orderTotalPrice | number:'1.2-2'| removeComma}}</td>
+        <td>
+            <i class="far fa-edit fa-lg text-info"  (click)="generatePDF(order)" style="cursor:pointer;"></i>
+        </td>
+        
+    </tr>
+</table>

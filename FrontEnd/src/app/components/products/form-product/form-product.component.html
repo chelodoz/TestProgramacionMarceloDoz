@@ -1,0 +1,65 @@
+<form [formGroup]="form" (ngSubmit)="saveProduct()">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-box-open fa-fw" [class.green-icon]="this.form.get('productName').valid"
+                    [class.red-icon]="this.form.get('productName').invalid && this.form.get('productName').touched"></i>
+                </div>   
+            </div>
+            <input type="text" class="form-control" formControlName="productName" placeholder="Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-signature fa-fw" [class.green-icon]="this.form.get('productBrand').valid"
+                    [class.red-icon]="this.form.get('productBrand').invalid && this.form.get('productBrand').touched "></i>
+                </div>   
+            </div>
+            <input type="text" class="form-control" formControlName="productBrand" placeholder="Brand">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-dollar-sign fa-fw" [class.green-icon]="this.form.get('productUnitPrice').valid"
+                    [class.red-icon]="this.form.get('productUnitPrice').invalid  && this.form.get('productUnitPrice').touched"></i>
+                </div>   
+            </div>
+            <input type="number" class="form-control" formControlName="productUnitPrice" placeholder="Unit Price">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-trash-alt fa-fw" [class.green-icon]="this.form.get('productExpirationDate').valid"
+                    [class.red-icon]="this.form.get('productExpirationDate').invalid  && this.form.get('productExpirationDate').touched"></i>
+                </div>   
+            </div>
+            <input type="date" class="form-control" formControlName="productExpirationDate">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-truck fa-fw" [class.green-icon]="this.form.get('providerId').valid"
+                    [class.red-icon]="this.form.get('providerId').invalid  && this.form.get('providerId').touched"></i>
+                </div>   
+            </div>
+        <select class="form-control" id="provider" formControlName="providerId">
+            <option selected value="0">Select Provider</option>
+            <option *ngFor="let provider of providerService.list"  value="{{provider.providerId}}">{{provider.providerName}}
+            </option>
+        </select>
+    </div>
+    </div>
+    <div class="form-group">
+        
+        <button class="btn btn-success btn-lg btn-block" [disabled]="form.invalid" type="submit">Submit</button>
+    </div>
+</form>

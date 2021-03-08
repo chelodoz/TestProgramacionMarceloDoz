@@ -1,0 +1,24 @@
+<table class="table table-sm">
+    <thead>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Expiration</th>
+        <th>Provider</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tr *ngFor="let product of productService.list">
+        <td>{{product.productName}}</td>
+        <td>{{product.productBrand}}</td>
+        <td>{{product.productExpirationDate | date:'dd/MM/yyyy'}}</td>
+        <td>{{product.provider.providerName}}</td>
+        <td>$ {{product.productUnitPrice}}</td>
+        <td>
+            <i class="far fa-edit fa-lg text-info" (click)="editProduct(product)" style="cursor:pointer;"></i>
+        </td>
+        <td>
+            <i class="far fa-trash-alt fa-lg text-danger" (click)="deleteProduct(product.productId)" style="cursor:pointer;"></i>
+        </td>
+    </tr>
+</table>

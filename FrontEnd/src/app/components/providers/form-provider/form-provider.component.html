@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="saveProvider()">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-truck fa-fw" [class.green-icon]="this.form.get('providerName').valid"
+                    [class.red-icon]="this.form.get('providerName').invalid && this.form.get('providerName').touched"></i>
+                </div>   
+            </div>
+            <input type="text" class="form-control" formControlName="providerName" placeholder="First Name">
+        </div>
+    </div>
+    
+   
+    <div class="form-group">        
+        <button class="btn btn-success btn-lg btn-block" [disabled]="form.invalid" type="submit">Submit</button>
+    </div>
+</form>

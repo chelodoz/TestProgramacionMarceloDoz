@@ -1,0 +1,27 @@
+<table class="table table-sm">
+    <thead>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>DNI</th>
+        <th>Credit Card</th>
+        <th>Birthdate</th>
+        <th></th>
+        <th></th>
+        
+    </thead>
+    <tr *ngFor="let customer of customerService.list">
+        <td>{{customer.customerId}}</td>
+        <td>{{customer.customerFirstName}}</td>
+        <td>{{customer.customerLastName}}</td>
+        <td>{{customer.customerDni}}</td>
+        <td>{{customer.customerCreditCard}}</td>
+        <td>{{customer.customerBirthDate | date:'dd/MM/yyyy'}}</td>
+        <td>
+            <i class="far fa-edit fa-lg text-info" (click)="editCustomer(customer)" style="cursor:pointer;"></i>
+        </td>
+        <td>
+            <i class="far fa-trash-alt fa-lg text-danger" (click)="deleteCustomer(customer.customerId)" style="cursor:pointer;"></i>
+        </td>
+    </tr>
+</table>

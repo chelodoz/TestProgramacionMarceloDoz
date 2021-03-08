@@ -1,0 +1,24 @@
+<table class="table table-sm">
+    <thead>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>DNI</th>
+        <th>Birthdate</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tr *ngFor="let employee of employeeService.list">
+        <td>{{employee.employeeId}}</td>
+        <td>{{employee.employeeFirstName}}</td>
+        <td>{{employee.employeeLastName}}</td>
+        <td>{{employee.employeeDni}}</td>
+        <td>{{employee.employeeBirthDate | date:'dd/MM/yyyy'}}</td>
+        <td>
+            <i class="far fa-edit fa-lg text-info" (click)="editEmployee(employee)" style="cursor:pointer;"></i>
+        </td>
+        <td>
+            <i class="far fa-trash-alt fa-lg text-danger" (click)="deleteEmployee(employee.employeeId)" style="cursor:pointer;"></i>
+        </td>
+    </tr>
+</table>

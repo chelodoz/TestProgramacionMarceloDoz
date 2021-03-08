@@ -1,0 +1,17 @@
+<table class="table table-sm">
+    <thead>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tr *ngFor="let provider of providerService.list">
+        <td>{{provider.providerName}}</td>
+        <td>
+            <i class="far fa-edit fa-lg text-info" (click)="editProvider(provider)" style="cursor:pointer;"></i>
+        </td>
+        <td>
+            <i class="far fa-trash-alt fa-lg text-danger" (click)="deleteProvider(provider.providerId)"
+                style="cursor:pointer;"></i>
+        </td>
+    </tr>
+</table>

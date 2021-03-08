@@ -1,0 +1,59 @@
+<!--<div>
+
+
+    <div class="form-group">
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Search"aria-describedby="emailHelp">
+    </div>
+<div *ngFor="let product of productService.list" class="list-group" id="list-tab" role="tablist">
+    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home"
+        role="tab" aria-controls="home"> name: {{product.productName}}</a>
+</div>
+
+</div>
+
+<div class="form-group">
+    <label for="search">Search</label>
+    <input type="text" class="form-control" id="search" placeholder="Search" aria-describedby="emailHelp">
+</div>
+
+-->
+<form [formGroup]="form" *ngIf="this.form" (ngSubmit)="addProduct()">
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Products</label>
+    <select class="form-control" id="exampleFormControlSelect1" formControlName="id" (change)="updatePrice($event.target.value)">
+        <option selected value="0">Open this select menu</option>
+        <option *ngFor="let product of productService.list"  value="{{product.productId}}">{{product.productName}} {{product.productBrand}}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="quantity">Quantity</label>
+    <input type="number" class="form-control" id="quantity" formControlName="quantity">
+</div>
+<div class="form-group">
+    <label for="expirationdate">Expiration Date</label>
+    <input type="text" class="form-control" id="expirationdate" formControlName="expirationdate" readonly>
+</div>
+
+<div class="form-group">
+    <label for="providername">Provider Name</label>
+    <input type="text" class="form-control" id="providername" formControlName="providername" readonly>
+</div>
+<div class="form-group">
+    <label for="unitprice">Unit Price</label>
+    <input type="text" class="form-control" id="unitprice" formControlName="unitprice" readonly>
+</div>
+
+<div class="form-group">
+    <button class="btn btn-info btn-lg btn-block" [disabled]="form.invalid" type="submit">Add Product</button>
+</div>
+</form>
+<!--
+<ul id="notebook_ul">
+    <li *ngFor="let product of productService.list">
+      name: {{product.productName}}<br/>
+      procesor: {{product.productBrand}}<br/>
+    </li>
+  </ul>
+
+-->

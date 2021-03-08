@@ -1,0 +1,49 @@
+<form [formGroup]="form" (ngSubmit)="saveEmployee()">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-user-circle fa-fw" [class.green-icon]="this.form.get('name').valid"
+                    [class.red-icon]="this.form.get('name').invalid && this.form.get('name').touched"></i>
+                </div>   
+            </div>
+            <input type="text" class="form-control" formControlName="name" placeholder="First Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-user-circle fa-fw" [class.green-icon]="this.form.get('surname').valid"
+                    [class.red-icon]="this.form.get('surname').invalid && this.form.get('surname').touched "></i>
+                </div>   
+            </div>
+            <input type="text" class="form-control" formControlName="surname" placeholder="Last Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-id-card fa-fw" [class.green-icon]="this.form.get('dni').valid"
+                    [class.red-icon]="this.form.get('dni').invalid  && this.form.get('dni').touched"></i>
+                </div>   
+            </div>
+            <input type="number" class="form-control" formControlName="dni" placeholder="DNI">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-birthday-cake fa-fw" [class.green-icon]="this.form.get('birthdate').valid"
+                    [class.red-icon]="this.form.get('birthdate').invalid  && this.form.get('birthdate').touched"></i>
+                </div>   
+            </div>
+            <input type="date" class="form-control" formControlName="birthdate">
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" [disabled]="form.invalid" type="submit">Submit</button>
+    </div>
+</form>
