@@ -1,3 +1,3 @@
 # TestProgramacionMarceloDoz
 
-[Documentation](TestProgramacionMarceloDoz/Analisis TestProgramacionMarceloDoz.pdf)
+[Documentation](./Analisis TestProgramacionMarceloDoz.pdf)
