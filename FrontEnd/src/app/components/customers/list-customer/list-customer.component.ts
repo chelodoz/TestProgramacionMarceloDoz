@@ -10,24 +10,32 @@ import { Customer } from 'src/app/models/customer';
 })
 export class ListCustomerComponent implements OnInit {
 
-  constructor(public customerService : CustomerService,
-    public toastr: ToastrService) { }
+
+  get customers() {
+    return this.customerService.customers;
+  }
+
+  constructor(
+    public customerService: CustomerService,
+    public toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.customerService.getCustomers();
+    console.log("customers",this.customers);
   }
-  deleteCustomer(id : number){
-    if(confirm('Confirm delete action')){
+  deleteCustomer(id: number) {
+    if (confirm('Confirm delete action')) {
       this.customerService.deleteCustomer(id).subscribe(data => {
         this.toastr.warning('Customer deleted');
         this.customerService.getCustomers();
       },
-      error=>{
-        this.toastr.error('Customer is attach to order','Cannot delete customer');
-      })
+        error => {
+          this.toastr.error('Customer is attach to order', 'Cannot delete customer');
+        })
     }
   }
-  editCustomer(customer : Customer){
+  editCustomer(customer: Customer) {
     this.customerService.updateCustomerForm(customer);
   }
 }

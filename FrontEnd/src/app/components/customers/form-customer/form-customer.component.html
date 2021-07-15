@@ -4,8 +4,8 @@
             <div class="input-group-prepend">
                 <div class="input-group-text bg-white">
                     <i class="fas fa-user-circle fa-fw" [class.green-icon]="this.form.get('customerFirstName').valid"
-                    [class.red-icon]="this.form.get('customerFirstName').invalid && this.form.get('customerFirstName').touched"></i>
-                </div>   
+                        [class.red-icon]="this.form.get('customerFirstName').invalid && this.form.get('customerFirstName').touched"></i>
+                </div>
             </div>
             <input type="text" class="form-control" formControlName="customerFirstName" placeholder="First Name">
         </div>
@@ -15,8 +15,8 @@
             <div class="input-group-prepend">
                 <div class="input-group-text bg-white">
                     <i class="fas fa-user-circle fa-fw" [class.green-icon]="this.form.get('customerLastName').valid"
-                    [class.red-icon]="this.form.get('customerLastName').invalid && this.form.get('customerLastName').touched "></i>
-                </div>   
+                        [class.red-icon]="this.form.get('customerLastName').invalid && this.form.get('customerLastName').touched "></i>
+                </div>
             </div>
             <input type="text" class="form-control" formControlName="customerLastName" placeholder="Last Name">
         </div>
@@ -26,8 +26,8 @@
             <div class="input-group-prepend">
                 <div class="input-group-text bg-white">
                     <i class="fas fa-id-card fa-fw" [class.green-icon]="this.form.get('customerDni').valid"
-                    [class.red-icon]="this.form.get('customerDni').invalid  && this.form.get('customerDni').touched"></i>
-                </div>   
+                        [class.red-icon]="this.form.get('customerDni').invalid  && this.form.get('customerDni').touched"></i>
+                </div>
             </div>
             <input type="number" class="form-control" formControlName="customerDni" placeholder="DNI">
         </div>
@@ -37,8 +37,8 @@
             <div class="input-group-prepend">
                 <div class="input-group-text bg-white">
                     <i class="fas fa-birthday-cake fa-fw" [class.green-icon]="this.form.get('customerBirthDate').valid"
-                    [class.red-icon]="this.form.get('customerBirthDate').invalid  && this.form.get('customerBirthDate').touched"></i>
-                </div>   
+                        [class.red-icon]="this.form.get('customerBirthDate').invalid  && this.form.get('customerBirthDate').touched"></i>
+                </div>
             </div>
             <input type="date" class="form-control" formControlName="customerBirthDate">
         </div>
@@ -48,16 +48,17 @@
             <div class="input-group-prepend">
                 <div class="input-group-text bg-white">
                     <i class="fas fa-credit-card fa-fw" [class.green-icon]="this.form.get('customerCreditCard').valid"
-                    [class.red-icon]="this.form.get('customerCreditCard').invalid  && this.form.get('customerCreditCard').touched"></i>
-                </div>   
+                        [class.red-icon]="this.form.get('customerCreditCard').invalid  && this.form.get('customerCreditCard').touched"></i>
+                </div>
             </div>
             <input type="number" class="form-control" formControlName="customerCreditCard" placeholder="Credit Card">
         </div>
     </div>
-   
+
     <div class="form-group">
-        <button class="btn btn-info btn-lg" type="reset"(click)="resetForm()">Reset</button>
-        <button class="btn btn-success btn-lg" [disabled]="form.invalid" type="submit">Submit</button>
+        
+            <button class="btn btn-info btn-lg mx-1" type="reset" (click)="resetForm()">Reset</button>
+            <button class="btn btn-success btn-lg mx-1" [disabled]="form.invalid" type="submit">Submit</button>
+       
     </div>
 </form>
-
