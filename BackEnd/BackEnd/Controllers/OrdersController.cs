@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BackEnd.Repository.Models;
+using BackEnd.Models;
 
 namespace BackEnd.Controllers
 {
@@ -13,16 +13,16 @@ namespace BackEnd.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private readonly MarceloDozDbContext _context;
+        private readonly db_marcelo_dozContext _context;
 
-        public OrdersController(MarceloDozDbContext context)
+        public OrdersController(db_marcelo_dozContext context)
         {
             _context = context;
         }
 
         // GET: api/Orders
         [HttpGet]
-         public IActionResult GetOrders()
+        public IActionResult GetOrders()
         {
 
             var orderList = _context.Orders.Select(o => new
@@ -31,7 +31,7 @@ namespace BackEnd.Controllers
                 o.OrderSaleDate,
                 o.OrderTotalPrice,
                 o.Customer,
-                
+
                 OrderDetails = o.OrderDetails.Select(od => new
                 {
                     od.OrderDetailUnitPrice,
@@ -46,38 +46,29 @@ namespace BackEnd.Controllers
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOrders([FromRoute] int id)
+        public async Task<ActionResult<Order>> GetOrder(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var order = await _context.Orders.FindAsync(id);
 
-            var orders = await _context.Orders.FindAsync(id);
-
-            if (orders == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return Ok(orders);
+            return order;
         }
 
         // PUT: api/Orders/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrders([FromRoute] int id, [FromBody] Orders orders)
+        public async Task<IActionResult> PutOrder(int id, Order order)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != orders.OrderId)
+            if (id != order.OrderId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(orders).State = EntityState.Modified;
+            _context.Entry(order).State = EntityState.Modified;
 
             try
             {
@@ -85,7 +76,7 @@ namespace BackEnd.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrdersExists(id))
+                if (!OrderExists(id))
                 {
                     return NotFound();
                 }
@@ -99,60 +90,33 @@ namespace BackEnd.Controllers
         }
 
         // POST: api/Orders
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<IActionResult> PostOrders([FromBody] Orders orders)
+        public async Task<ActionResult<Order>> PostOrder(Order order)
         {
-            try
-            {
-                Console.WriteLine(orders);
-                //Orders table
-                _context.Orders.Add(orders);
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
 
-                //OrderDetails table
-                foreach(var item in orders.OrderDetails)
-                {
-                    _context.OrderDetails.Add(item);
-                }
-                await _context.SaveChangesAsync();
-                return Ok();
-            }
-            catch(Exception ex)
-            {
-                return BadRequest();
-            }
-          
+            return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
         }
 
         // DELETE: api/Orders/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOrders([FromRoute] int id)
+        public async Task<IActionResult> DeleteOrder(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var orders = await _context.Orders.FindAsync(id);
-            if (orders == null)
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
 
-            try
-            {
-                _context.Orders.Remove(orders);
-                await _context.SaveChangesAsync();
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
 
-                return Ok(orders);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
-
+            return NoContent();
         }
 
-        private bool OrdersExists(int id)
+        private bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.OrderId == id);
         }

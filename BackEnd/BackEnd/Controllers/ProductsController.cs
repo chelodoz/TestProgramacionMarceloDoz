@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BackEnd.Repository.Models;
+using BackEnd.Models;
 
 namespace BackEnd.Controllers
 {
@@ -13,9 +13,9 @@ namespace BackEnd.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly MarceloDozDbContext _context;
+        private readonly db_marcelo_dozContext _context;
 
-        public ProductsController(MarceloDozDbContext context)
+        public ProductsController(db_marcelo_dozContext context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace BackEnd.Controllers
         [HttpGet]
         public IActionResult GetProducts()
         {
-            
+
             var productList = _context.Products.Select(p => new
             {
                 p.ProductId,
@@ -40,38 +40,29 @@ namespace BackEnd.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProducts([FromRoute] int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var product = await _context.Products.FindAsync(id);
 
-            var products = await _context.Products.FindAsync(id);
-
-            if (products == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return Ok(products);
+            return product;
         }
 
         // PUT: api/Products/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducts([FromRoute] int id, [FromBody] Products products)
+        public async Task<IActionResult> PutProduct(int id, Product product)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != products.ProductId)
+            if (id != product.ProductId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(products).State = EntityState.Modified;
+            _context.Entry(product).State = EntityState.Modified;
 
             try
             {
@@ -79,7 +70,7 @@ namespace BackEnd.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductsExists(id))
+                if (!ProductExists(id))
                 {
                     return NotFound();
                 }
@@ -93,50 +84,33 @@ namespace BackEnd.Controllers
         }
 
         // POST: api/Products
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<IActionResult> PostProducts([FromBody] Products products)
+        public async Task<ActionResult<Product>> PostProduct(Product product)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Products.Add(products);
+            _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProducts", new { id = products.ProductId }, products);
+            return CreatedAtAction("GetProduct", new { id = product.ProductId }, product);
         }
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducts([FromRoute] int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var products = await _context.Products.FindAsync(id);
-            if (products == null)
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
-            try
-            {
-                _context.Products.Remove(products);
-                await _context.SaveChangesAsync();
 
-                return Ok(products);
-            }
-            
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
 
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
+            return NoContent();
         }
 
-        private bool ProductsExists(int id)
+        private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.ProductId == id);
         }
